@@ -10,6 +10,7 @@ class Customer {
   public get user(): String {
     return this._user;
   }
+
   public set user(value: String) {
     this._user = value;
   }
