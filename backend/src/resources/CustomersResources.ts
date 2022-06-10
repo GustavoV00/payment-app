@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { app } from "../index";
+import express, { Express, Request, Response } from "express";
+
+export const router = express.Router();
 
 // Find all customers
-const customers = "/customers/";
-app.get(customers, (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   res.send("Find all users");
 });
