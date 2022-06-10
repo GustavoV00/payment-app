@@ -6,3 +6,7 @@ export const router = express.Router();
 router.get("/", (req: Request, res: Response) => {
   res.send("Find all users");
 });
+
+router.get("/id/:id", (req: Request, res: Response) => {
+  res.send("Find by id");
+});
