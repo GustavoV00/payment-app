@@ -1,10 +1,28 @@
-class Customer {
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+
+@Entity()
+export class Customer {
+  @PrimaryGeneratedColumn("uuid")
+  private _id: number;
+
+  @Column("text")
   private _name: String;
+
+  @Column("text")
   private _user: String;
 
-  constructor(name: String, user: String) {
+  constructor(id: number, name: String, user: String) {
+    this._id = id;
     this._name = name;
     this._user = user;
+  }
+
+  public get id(): number {
+    return this._id;
+  }
+
+  public set id(value: number) {
+    this._id = value;
   }
 
   public get user(): String {
