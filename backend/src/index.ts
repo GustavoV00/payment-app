@@ -1,5 +1,7 @@
+import "reflect-metadata";
 import express, { Express, Request, Response } from "express";
-import * as customer from "./resources/CustomerResource";
+import { container } from "tsyringe";
+import CustomerResource from "./resources/CustomerResource";
 
 const main = async () => {
   const app: Express = express();
@@ -10,7 +12,8 @@ const main = async () => {
     res.send("Express + Typescript server");
   });
 
-  app.use("/customers", customer.router);
+  const customerResource = container.resolve(CustomerResource);
+  app.use("/customers", customerResource.routes());
 
   // Config to start the server
   app.listen(port, () => {

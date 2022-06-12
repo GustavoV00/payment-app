@@ -1,22 +1,32 @@
 import express, { Request, Response, Router } from "express";
-import { CustomerService } from "../services/CustomerService";
+import { autoInjectable } from "tsyringe";
+import { Customer } from "../entities/Customer";
+import CustomerService from "../services/CustomerService";
 
-export const router = express.Router();
+@autoInjectable()
+export default class CustomerResource {
+  private _customerService: CustomerService;
+  private _router: Router;
 
-class CustomerResource {
-  private customerService: CustomerService;
+  constructor(customerService: CustomerService) {
+    this._customerService = customerService;
+    this._router = Router();
+  }
 
-  constructor() {
-    router.get("/", (req: Request, res: Response) => {
-      res.send("Find all customers");
+  public routes() {
+    this._router.get("/", (req: Request, res: Response) => {
+      return this._customerService.findAllCustomers();
     });
 
-    router.get("/id/:id", (req: Request, res: Response) => {
-      res.send("Find customer by id");
+    this._router.get("/id/:id", (req: Request, res: Response) => {
+      return this._customerService.findCustomerById(1);
     });
 
-    router.post("/", (req: Request, res: Response) => {
-      res.send("Customer added");
+    this._router.post("/", (req: Request, res: Response) => {
+      const customer: Customer = new Customer(1, "asdsa", "asdsa");
+      return this._customerService.saveCustomer(customer);
     });
+
+    return this._router;
   }
 }
