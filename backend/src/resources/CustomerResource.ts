@@ -15,6 +15,7 @@ export default class CustomerResource {
 
   public routes() {
     this._router.get("/", (req: Request, res: Response) => {
+      // const customers: Customer = CustomerService.findAllCustomers();
       return this._customerService.findAllCustomers();
     });
 

@@ -21,7 +21,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
@@ -39,6 +39,6 @@ services:
 
 volumes:
   # frontend:
-  # backend:
+  backend:
   postgres:
   pgadmin:
