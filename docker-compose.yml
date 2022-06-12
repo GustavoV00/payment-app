@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  #   frontend:
+  #     build: ./frontend
+  #     container_name: payment-frontend
+  #     ports:
+  #       - "3000:3000"
+  #     restart: always
+  #     links:
+  #       - backend
+  backend:
+    build: ./backend
+    container_name: payment-backend
+    ports:
+      - "8080:8080"
+    restart: always
+    links:
+      - postgres
+  postgres:
+    container_name: payment-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  pgadmin:
+    container_name: payment-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+volumes:
+  # frontend:
+  # backend:
+  postgres:
+  pgadmin:
