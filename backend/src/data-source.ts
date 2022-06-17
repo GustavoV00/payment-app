@@ -1,16 +1,16 @@
 import { DataSource } from "typeorm";
-import { Customer } from "../entities/Customer";
+import { Customer } from "./entities/Customer";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "172.20.27.5",
   port: 5432,
   username: "postgres",
   password: "test",
-  database: "payment-app",
+  database: "payment",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [Customer],
   subscribers: [],
-  migrations: [],
+  migrations: ["./migrations/*.ts"],
 });

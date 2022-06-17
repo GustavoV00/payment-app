@@ -14,18 +14,19 @@ export default class CustomerResource {
   }
 
   public routes() {
-    this._router.get("/", (req: Request, res: Response) => {
-      // const customers: Customer = CustomerService.findAllCustomers();
-      return this._customerService.findAllCustomers();
+    this._router.get("/", async (req: Request, res: Response) => {
+      const test = await this._customerService.findAllCustomers();
+      return res.status(200).send(test);
     });
 
-    this._router.get("/id/:id", (req: Request, res: Response) => {
-      return this._customerService.findCustomerById(1);
+    this._router.get("/:id", (req: Request, res: Response) => {
+      let id: string = this._customerService.findCustomerById(1);
+      return res.status(200).send(id);
     });
 
     this._router.post("/", (req: Request, res: Response) => {
-      const customer: Customer = new Customer(1, "asdsa", "asdsa");
-      return this._customerService.saveCustomer(customer);
+      console.log(req);
+      return res.sendStatus(200);
     });
 
     return this._router;

@@ -1,24 +1,17 @@
 import "reflect-metadata";
-import express, { Express, Request, Response } from "express";
 import { container } from "tsyringe";
 import CustomerResource from "./resources/CustomerResource";
+import BasicConfig from "./configs/BasicConfig";
 
 const main = async () => {
-  const app: Express = express();
-  const port: number = 8080;
+  const config = new BasicConfig(8080);
+  config.initializeDatabaseConfig();
 
-  // Home
-  app.get("/", (req: Request, res: Response) => {
-    res.send("Express + Typescript server");
-  });
-
+  // Customer end-point
   const customerResource = container.resolve(CustomerResource);
-  app.use("/customers", customerResource.routes());
+  config.app.use("/customers", customerResource.routes());
 
-  // Config to start the server
-  app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-  });
+  config.listen();
 };
 
 main().catch((error) => {

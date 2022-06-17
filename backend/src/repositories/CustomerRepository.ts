@@ -1,16 +1,9 @@
-export default class CustomerRepository {
-  private _customers = ["joao", "pedro"];
+import { Repository } from "typeorm";
+import { AppDataSource } from "../data-source";
+import { Customer } from "../entities/Customer";
 
-  public get customers() {
-    return this._customers;
+export default class CustomerRepository {
+  public CustomerRepository(): Repository<Customer> {
+    return AppDataSource.getRepository(Customer);
   }
 }
-
-// export class UserRepo {
-//   constructor() {}
-
-//   getUsers(): Promise<User[]> {
-//     // Use Sequelize or TypeORM to retrieve the users from
-//     // a database.
-//   }
-// }

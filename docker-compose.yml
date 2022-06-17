@@ -8,14 +8,14 @@ services:
   #     restart: always
   #     links:
   #       - backend
-  backend:
-    build: ./backend
-    container_name: payment-backend
-    ports:
-      - "8080:8080"
-    restart: always
-    links:
-      - postgres
+  # backend:
+  #   build: ./backend
+  #   container_name: payment-backend
+  #   ports:
+  #     - "8080:8080"
+  #   restart: always
+  #   links:
+  #     - postgres
   postgres:
     container_name: payment-postgres
     image: postgres
@@ -39,6 +39,6 @@ services:
 
 volumes:
   # frontend:
-  backend:
+  # backend:
   postgres:
   pgadmin:

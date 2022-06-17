@@ -1,26 +1,28 @@
 import { injectable } from "tsyringe";
+import { Repository } from "typeorm";
 import { Customer } from "../entities/Customer";
 import CustomerRepository from "../repositories/CustomerRepository";
 
 @injectable()
 export default class CustomerService {
-  private _customerRepository: CustomerRepository;
+  private customerRepository: Repository<Customer>;
 
   constructor(customerRepository: CustomerRepository) {
-    this._customerRepository = customerRepository;
+    this.customerRepository = customerRepository.CustomerRepository();
   }
 
-  findAllCustomers() {
-    console.log("PROCUIRANDO TODOS OS CUSTOMERSJK");
-    return this._customerRepository.customers;
+  findAllCustomers(): Promise<Customer[]> {
+    return this.customerRepository.find();
   }
 
-  findCustomerById(id: number): number {
+  findCustomerById(id: number): string {
     console.log("procura no banco de dados");
-    return id;
+    const idString: string = id.toString();
+    return idString;
   }
 
   saveCustomer(customer: Customer): void {
     console.log("Customer salvo dom sucesso: ", customer);
+    this.customerRepository.save(customer);
   }
 }
