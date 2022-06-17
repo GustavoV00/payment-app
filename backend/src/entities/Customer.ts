@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
+@Entity({ name: "tb_customers" })
 export class Customer {
   @PrimaryGeneratedColumn()
-  private _id: number;
+  private _id!: number;
 
   @Column("text")
   private _name: String;
@@ -11,8 +11,7 @@ export class Customer {
   @Column("text")
   private _user: String;
 
-  constructor(id: number, name: String, user: String) {
-    this._id = id;
+  constructor(name: String, user: String) {
     this._name = name;
     this._user = user;
   }

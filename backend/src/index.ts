@@ -4,7 +4,9 @@ import CustomerResource from "./resources/CustomerResource";
 import BasicConfig from "./configs/BasicConfig";
 
 const main = async () => {
-  const config = new BasicConfig(8080);
+  const config = new BasicConfig(6060);
+
+  config.parseBodyToJson();
   config.initializeDatabaseConfig();
 
   // Customer end-point

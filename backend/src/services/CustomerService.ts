@@ -15,10 +15,11 @@ export default class CustomerService {
     return this.customerRepository.find();
   }
 
-  findCustomerById(id: number): string {
+  findCustomerById(id: number): Promise<Customer | null> {
     console.log("procura no banco de dados");
-    const idString: string = id.toString();
-    return idString;
+    return this.customerRepository.findOneBy({
+      id,
+    });
   }
 
   saveCustomer(customer: Customer): void {

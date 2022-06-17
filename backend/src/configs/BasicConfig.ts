@@ -16,6 +16,10 @@ export default class BasicConfig {
     return this._app;
   }
 
+  public parseBodyToJson() {
+    this._app.use(express.json());
+  }
+
   public routes() {
     // Home
     this.router.get("/", (req: Request, res: Response) => {
