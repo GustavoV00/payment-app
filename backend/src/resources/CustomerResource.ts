@@ -22,13 +22,18 @@ export default class CustomerResource {
     this._router.get("/:id", async (req: Request, res: Response) => {
       const idParam: number = parseInt(req.params.id);
       const customer = await this._customerService.findCustomerById(idParam);
+      console.log(customer);
       return res.status(200).send(customer);
     });
 
     this._router.post("/", (req: Request, res: Response) => {
       console.log(req.body.customer);
       const customerAux = req.body.customer;
-      const customer = new Customer(customerAux.name, customerAux.user);
+      const customer = new Customer(
+        undefined,
+        customerAux.name,
+        customerAux.user
+      );
       this._customerService.saveCustomer(customer);
       return res.sendStatus(200);
     });

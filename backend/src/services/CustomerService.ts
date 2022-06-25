@@ -15,15 +15,11 @@ export default class CustomerService {
     return this.customerRepository.find();
   }
 
-  findCustomerById(id: number): Promise<Customer | null> {
-    console.log("procura no banco de dados");
-    return this.customerRepository.findOneBy({
-      id,
-    });
+  findCustomerById(id: number) {
+    return this.customerRepository.find({ where: { id } });
   }
 
   saveCustomer(customer: Customer): void {
-    console.log("Customer salvo dom sucesso: ", customer);
     this.customerRepository.save(customer);
   }
 }

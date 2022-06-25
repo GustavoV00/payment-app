@@ -2,25 +2,27 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name: "tb_customers" })
 export class Customer {
-  @PrimaryGeneratedColumn()
-  private _id!: number;
+  @PrimaryGeneratedColumn({ name: "id", type: "int" })
+  private _id: number | undefined;
 
-  @Column("text")
+  @Column({ name: "customer_name", type: "text" })
   private _name: String;
 
-  @Column("text")
+  @Column({ name: "user_name", type: "text" })
   private _user: String;
 
-  constructor(name: String, user: String) {
+  constructor(id: number | undefined, name: String, user: String) {
+    if (id) this._id = id;
     this._name = name;
     this._user = user;
   }
 
-  public get id(): number {
-    return this._id;
+  public get id(): number | undefined {
+    if (this._id) return this._id;
+    return undefined;
   }
 
-  public set id(value: number) {
+  public set id(value: number | undefined) {
     this._id = value;
   }
 
@@ -35,6 +37,7 @@ export class Customer {
   public get name(): String {
     return this._name;
   }
+
   public set name(value: String) {
     this._name = value;
   }
