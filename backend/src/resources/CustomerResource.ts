@@ -19,12 +19,12 @@ export default class CustomerResource {
       return res.status(200).send(test);
     });
 
-    this._router.get("/:id", async (req: Request, res: Response) => {
-      const idParam: number = parseInt(req.params.id);
-      const customer = await this._customerService.findCustomerById(idParam);
-      console.log(customer);
-      return res.status(200).send(customer);
-    });
+    // this._router.get("/:id", async (req: Request, res: Response) => {
+    //   const idParam: number = parseInt(req.params.id);
+    //   const customer = await this._customerService.findCustomerById(idParam);
+    //   console.log(customer);
+    //   return res.status(200).send(customer);
+    // });
 
     this._router.post("/", (req: Request, res: Response) => {
       console.log(req.body.customer);

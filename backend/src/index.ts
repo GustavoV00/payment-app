@@ -4,7 +4,7 @@ import CustomerResource from "./resources/CustomerResource";
 import BasicConfig from "./configs/BasicConfig";
 
 const main = async () => {
-  const config = new BasicConfig(6060);
+  const config = new BasicConfig(8080);
 
   config.parseBodyToJson();
   config.initializeDatabaseConfig();
