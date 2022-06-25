@@ -10,5 +10,5 @@ Uma api simples com o intuito de aprender sobre desenvolvimento utilizando repos
 
 # Rotas
 
-Para pegar todos os customers: `ip/customers` -> requisição do tipo GET
+Para pegar todos os customers: `ip/customers` -> requisição do tipo GET <br />
 Para criar um customer: `ip/customers` -> Requisição do tipo POST
